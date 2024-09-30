@@ -1,8 +1,10 @@
 package org.example.server.entity;
 
-import java.util.Date;
+import jakarta.persistence.Entity;
 
-public class Notification {
+import java.util.Date;
+@Entity
+public class Notification  {
     private int id;
     private String description;
     private Date createdAt;
