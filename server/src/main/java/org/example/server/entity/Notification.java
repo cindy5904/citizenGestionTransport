@@ -1,21 +1,32 @@
 package org.example.server.entity;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.util.Date;
 @Entity
+@Table(name = "notifications")
+
 public class Notification  {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String description;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date createdAt;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date expiredAt;
+    @Column(nullable = false)
     private boolean isActive;
+
+
+    @ManyToOne
+    @JoinColumn(name= "transport_line_id", nullable = false)
     private transportLine TransportLine;
 
     public Notification() {}
 
-    public Notification(int id, String description, Date createdAt, Date expiredAt, boolean isActive, transportLine transportLine) {
-
+    public Notification(long id, String description, Date createdAt, Date expiredAt, boolean isActive, transportLine transportLine) {
         this.id = id;
         this.description = description;
         this.createdAt = createdAt;
@@ -24,11 +35,11 @@ public class Notification  {
         TransportLine = transportLine;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
