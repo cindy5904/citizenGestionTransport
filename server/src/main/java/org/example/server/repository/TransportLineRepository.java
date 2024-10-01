@@ -8,11 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TransportLineRepository extends JpaRepository<TransportLine, Integer> {
+public interface TransportLineRepository extends JpaRepository<TransportLine, Long> {
 
-    Optional<TransportLine> findById(Integer id);
-
-
-
-
+    List<TransportLine> findByNameContaining(String name);
 }
