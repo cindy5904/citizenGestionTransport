@@ -56,7 +56,7 @@ public class NotificationService {
             notification.setDescription(notificationDetails.getDescription());
             notification.setCreatedAt(notificationDetails.getCreatedAt());
             notification.setExpiredAt(notificationDetails.getExpiredAt());
-            notification.setActive(notificationDetails.getIsActive());
+            // notification.setActive(notificationDetails.getIsActive());
             notification.setTransportLine(notificationDetails.getTransportLine());
             return notificationRepository.save(notification);
         } else {
