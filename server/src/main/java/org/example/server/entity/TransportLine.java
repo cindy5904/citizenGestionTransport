@@ -13,29 +13,33 @@ public class TransportLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false)
     private String origin;
 
-    @Column(nullable = false)
     private String destination;
 
-    @OneToMany(mappedBy = "transportLine", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "transportLine", cascade = CascadeType.ALL)
     private List<Notification> notifications;
 
-    @OneToMany(mappedBy = "transportLine", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "transportLine", cascade = CascadeType.ALL)
     private List<Schedule> schedules;
 
-   public TransportLine() {}
-    public TransportLine(String name, String origin, String destination) {
-       this.name = name;
-       this.origin = origin;
-       this.destination = destination;
+    // Relation avec TransportType (ManyToOne)
+    @ManyToOne
+    @JoinColumn(name = "transport_type_id", nullable = false)
+    private TransportType transportType;
 
+    // Constructeurs, Getters et Setters
+    public TransportLine() {}
+
+    public TransportLine(String name, String origin, String destination) {
+        this.name = name;
+        this.origin = origin;
+        this.destination = destination;
     }
 
+    // Getters et Setters
     public Long getId() {
         return id;
     }
@@ -82,5 +86,13 @@ public class TransportLine {
 
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
+    }
+
+    public TransportType getTransportType() {
+        return transportType;
+    }
+
+    public void setTransportType(TransportType transportType) {
+        this.transportType = transportType;
     }
 }

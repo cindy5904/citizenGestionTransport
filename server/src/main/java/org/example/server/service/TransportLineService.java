@@ -1,6 +1,7 @@
 package org.example.server.service;
 
 
+import jakarta.persistence.EntityNotFoundException;
 import org.example.server.entity.TransportLine;
 import org.example.server.repository.TransportLineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,41 +18,43 @@ public class TransportLineService {
     @Autowired
     private TransportLineRepository transportLineRepository;
 
-
-    // Méthode pour obtenir toutes les lignes de transport
     public List<TransportLine> getAllTransportLines() {
         return transportLineRepository.findAll();
     }
 
-    public TransportLine createTransportLine(TransportLine transportLine) {
+    public TransportLine getTransportLineById(Long id) {
+        return transportLineRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("TransportLine not found"));
+    }
+
+    public TransportLine saveTransportLine(TransportLine transportLine) {
         return transportLineRepository.save(transportLine);
     }
-    //Permet de récuperer
-    public Optional<TransportLine> getTransportLineById(Long id) {
-        return transportLineRepository.findByLineId(id);
-    }
 
-    public TransportLine updateTransportLine(TransportLine transportLine) {
-        Optional<TransportLine> existTransportLine = transportLineRepository.findById(id);
-        if (existTransportLine.isPresent()) {
-            TransportLine existingTransportLine = existTransportLine.get();
-            transportLine.setName(existingTransportLine.getName());
-            transportLine.setOrigin(existingTransportLine.getOrigin());
-            transportLine.setDestination(existingTransportLine.getDestination());
-            transportLine.setNotifications(existingTransportLine.getNotifications());
-            transportLine.setSchedules(existingTransportLine.getSchedules());
+    // Méthode pour mettre à jour une ligne de transport existante
+    public TransportLine updateTransportLine(Long id, TransportLine transportLineDetails) {
+        Optional<TransportLine> existingTransportLine = transportLineRepository.findById(id);
+
+        if (existingTransportLine.isPresent()) {
+            TransportLine transportLine = existingTransportLine.get();
+            transportLine.setName(transportLineDetails.getName());
+            transportLine.setDestination(transportLineDetails.getDestination());
+            transportLine.setOrigin(transportLineDetails.getOrigin());
+            transportLine.setNotifications(transportLineDetails.getNotifications());
+            transportLine.setSchedules(transportLineDetails.getSchedules());
             return transportLineRepository.save(transportLine);
         } else {
-            throw new RuntimeException("Transport Line Not Found with id" + id);
-
+            throw new RuntimeException("TransportLine with id " + id + " not found");
         }
     }
-
-    public void deleteTransportLine(Long id) {
+    public void deleteTransportLineById(Long id) {
         if (transportLineRepository.existsById(id)){
             transportLineRepository.deleteById(id);
         } else {
-            throw new RuntimeException("Transport Line Not Found with id" + id);
+            throw new RuntimeException("TransportLine with id " + id + " not found");
         }
     }
+
+
+
+
 }

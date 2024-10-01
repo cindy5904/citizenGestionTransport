@@ -2,44 +2,46 @@ package org.example.server.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 @Entity
 @Table(name = "notifications")
 
-public class Notification  {
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
     private String description;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date createdAt;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date expiredAt;
-    @Column(nullable = false)
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime expiredAt;
+
     private boolean isActive;
 
-
     @ManyToOne
-    @JoinColumn(name= "transport_line_id", nullable = false)
-    private transportLine TransportLine;
+    @JoinColumn(name = "transport_line_id")
+    private TransportLine transportLine;
 
-    public Notification() {}
+    // Constructeurs, Getters et Setters
+    public Notification() {
+    }
 
-    public Notification(long id, String description, Date createdAt, Date expiredAt, boolean isActive, transportLine transportLine) {
-        this.id = id;
+    public Notification(String description, LocalDateTime createdAt, LocalDateTime expiredAt, boolean isActive, TransportLine transportLine) {
         this.description = description;
         this.createdAt = createdAt;
         this.expiredAt = expiredAt;
         this.isActive = isActive;
-        TransportLine = transportLine;
+        this.transportLine = transportLine;
     }
 
-    public long getId() {
+    // Getters et Setters
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,23 +53,23 @@ public class Notification  {
         this.description = description;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getExpiredAt() {
+    public LocalDateTime getExpiredAt() {
         return expiredAt;
     }
 
-    public void setExpiredAt(Date expiredAt) {
+    public void setExpiredAt(LocalDateTime expiredAt) {
         this.expiredAt = expiredAt;
     }
 
-    public boolean isActive() {
+    public boolean IsActive() {
         return isActive;
     }
 
@@ -75,11 +77,21 @@ public class Notification  {
         isActive = active;
     }
 
-    public transportLine getTransportLine() {
-        return TransportLine;
+
+    public TransportLine getTransportLine() {
+        return transportLine;
     }
 
-    public void setTransportLine(transportLine transportLine) {
-        TransportLine = transportLine;
+    public void setTransportLine(TransportLine transportLine) {
+        this.transportLine = transportLine;
+    }
+
+
+
+    public boolean isIsActive() {
+        return isActive;
     }
 }
+
+
+
