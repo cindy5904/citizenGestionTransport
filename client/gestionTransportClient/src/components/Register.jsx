@@ -24,7 +24,6 @@ const Register = () => {
       console.log('Form Data:', formData);
   
       
-      // axios.post('/api/register', formData).then(response => console.log(response));
     };
   
     return (
