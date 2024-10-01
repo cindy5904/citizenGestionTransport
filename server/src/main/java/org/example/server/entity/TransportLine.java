@@ -25,6 +25,11 @@ public class TransportLine {
     @OneToMany(mappedBy = "transportLine", cascade = CascadeType.ALL)
     private List<Schedule> schedules;
 
+    // Relation avec TransportType (ManyToOne)
+    @ManyToOne
+    @JoinColumn(name = "transport_type_id", nullable = false)
+    private TransportType transportType;
+
     // Constructeurs, Getters et Setters
     public TransportLine() {}
 
@@ -81,5 +86,13 @@ public class TransportLine {
 
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
+    }
+
+    public TransportType getTransportType() {
+        return transportType;
+    }
+
+    public void setTransportType(TransportType transportType) {
+        this.transportType = transportType;
     }
 }
