@@ -1,0 +1,15 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.top-section {
+    height: 30px;
+    background-color: #00A994;
+}
+
+.bottom-section {
+    height: 50px;
+    background-color: #0C71C3;
+}

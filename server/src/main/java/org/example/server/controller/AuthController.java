@@ -1,40 +1,41 @@
 package org.example.server.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.example.server.dto.BaseResponseDto;
+import org.example.server.dto.JwtAuthResponse;
+import org.example.server.dto.LoginDto;
+import org.example.server.dto.RegisterDto;
+import org.example.server.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final AuthService authService;
+    @Autowired
+    private AuthService authService;
 
-    public AuthController(AuthService authService) {
-        this.authService = authService;
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto, @RequestParam String role) {
+        String response = authService.register(registerDto.getEmail(), registerDto.getPassword(), role);
+        return ResponseEntity.ok(response);
     }
 
-    // Inscription pour Citizen
-    @PostMapping("/citizen/register")
-    public ResponseEntity<String> registerCitizen(@RequestBody RegisterDto registerDto) {
-        String response = authService.register(registerDto, "CITIZEN");
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
-
-    // Inscription pour Admin
-    @PostMapping("/admin/register")
-    public ResponseEntity<String> registerAdmin(@RequestBody RegisterDto registerDto) {
-        String response = authService.register(registerDto, "ADMIN");
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
-
-    // Connexion pour Citizen et Admin
     @PostMapping("/login")
-    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginDto loginDto) {
-        String token = authService.login(loginDto);
-        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
-        jwtAuthResponse.setAccessToken(token);
-        return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
+        String token = authService.login(loginDto.getEmail(), loginDto.getPassword());
+        return ResponseEntity.ok(token);
+    }
+
+    @GetMapping("/validate-token")
+    public ResponseEntity<Boolean> validateToken(@RequestParam String token) {
+        boolean isValid = authService.validateToken(token);
+        return ResponseEntity.ok(isValid);
     }
 }

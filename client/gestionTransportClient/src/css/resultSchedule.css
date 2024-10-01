@@ -1,0 +1,40 @@
+.result-schedule {
+    position: relative;
+    background-image: url("../assets/train.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 650px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    opacity: 0.7;
+} 
+
+.sec-bot {
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+    
+}
+
+.megaphone img {
+    width: 65px;
+    padding-right: 10px;
+}
+
+.title-group {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+
+}
+.icon-group {
+    margin-top: 30px;
+}
+
+.text-megaphone h2 {
+    color: #005ea2;
+}
+
+
+  

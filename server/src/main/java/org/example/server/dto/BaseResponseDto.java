@@ -2,24 +2,23 @@ package org.example.server.dto;
 
 public class BaseResponseDto {
 
-    private Object message;
-    private Object data;
+    private String status;
+    private Object data; // Peut être un DTO spécifique ou un objet générique
+    private String message; // Un message comme "success", "failed", etc.
 
-    public BaseResponseDto(Object message, Object data) {
-        this.message = message;
+    public BaseResponseDto(String status, Object data, String message) {
+        this.status = status;
         this.data = data;
-    }
-
-    public BaseResponseDto(Object message) {
         this.message = message;
     }
 
-    public Object getMessage() {
-        return message;
+    // Getters et Setters
+    public String getStatus() {
+        return status;
     }
 
-    public void setMessage(Object message) {
-        this.message = message;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Object getData() {
@@ -29,4 +28,15 @@ public class BaseResponseDto {
     public void setData(Object data) {
         this.data = data;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+
+
 }
