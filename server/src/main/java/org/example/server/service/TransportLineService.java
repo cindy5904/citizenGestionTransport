@@ -2,6 +2,8 @@ package org.example.server.service;
 
 
 import jakarta.persistence.EntityNotFoundException;
+import org.example.server.dto.schedule.TransportLineDtoGet;
+import org.example.server.dto.schedule.TransportLineDtoPost;
 import org.example.server.entity.TransportLine;
 import org.example.server.repository.TransportLineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 public class TransportLineService {
@@ -31,7 +31,7 @@ public class TransportLineService {
     }
 
     // Méthode pour mettre à jour une ligne de transport existante
-    public TransportLine updateTransportLine(Long id, TransportLine transportLineDetails) {
+    public TransportLine updateTransportLine(Long id, TransportLineDtoPost transportLineDetails) {
         Optional<TransportLine> existingTransportLine = transportLineRepository.findById(id);
 
         if (existingTransportLine.isPresent()) {
@@ -55,6 +55,6 @@ public class TransportLineService {
     }
 
 
-
-
+    public TransportLineDtoGet createTransportLine(TransportLineDtoPost transportLineDtoPost) {
+    }
 }
