@@ -1,9 +1,8 @@
-package org.example.server.dto.schedule;
+package org.example.server.dto;
 
 import java.time.LocalDateTime;
 
-public class NotificationDtoGet {
-    private int id;
+public class NotificationDtoPost {
     private String description;
     private LocalDateTime createdAt;
     private LocalDateTime expireddAt;
