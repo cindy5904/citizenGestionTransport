@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "notifications")
 
@@ -23,6 +25,16 @@ public class Notification {
     @ManyToOne
     @JoinColumn(name = "transport_line_id")
     private TransportLine transportLine;
+
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    private Admin author;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "citizen_notification",
+            joinColumns = @JoinColumn(name = "notification_id",  referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "citizen_id",  referencedColumnName = "id"))
+    private List<Citizen> citizens;
 
     // Constructeurs, Getters et Setters
     public Notification() {

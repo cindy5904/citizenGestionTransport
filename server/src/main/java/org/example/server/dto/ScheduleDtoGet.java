@@ -1,4 +1,4 @@
-package org.example.server.dto.schedule;
+package org.example.server.dto;
 
 import org.example.server.enums.DaysOfWeeks;
 

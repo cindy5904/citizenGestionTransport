@@ -1,4 +1,4 @@
-package org.example.server.dto.schedule;
+package org.example.server.dto;
 
 import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.processing.Pattern;

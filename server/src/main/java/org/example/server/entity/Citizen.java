@@ -19,6 +19,7 @@ public class Citizen {
     private String lastName;
     private String email;
     private String password;
-    @OneToMany(mappedBy = "citizens")
+
+    @ManyToMany(mappedBy = "citizens")
     private List<Notification> notifications;
 }
