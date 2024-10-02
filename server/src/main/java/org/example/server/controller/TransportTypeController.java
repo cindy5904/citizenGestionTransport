@@ -1,7 +1,5 @@
 package org.example.server.controller;
 
-import org.example.server.dto.schedule.TransportLineDtoGet;
-import org.example.server.dto.schedule.TransportLineDtoPost;
 import org.example.server.dto.schedule.TransportTypeDtoGet;
 import org.example.server.dto.schedule.TransportTypeDtoPost;
 import org.example.server.entity.TransportType;
@@ -26,16 +24,16 @@ public class TransportTypeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TransportLineDtoGet> createTransportType(@RequestBody TransportTypeDtoPost transportTypeDtoPost) {
-        TransportType createdTransportLine = transportTypeService.createTransportType(transportTypeDtoPost);
-        return new ResponseEntity(createdTransportLine, HttpStatus.CREATED);
+    public ResponseEntity<TransportTypeDtoGet> createTransportType(@RequestBody TransportTypeDtoPost transportTypeDtoPost) {
+        TransportTypeDtoGet createdTransportType = transportTypeService.createTransportType(transportTypeDtoPost);
+        return new ResponseEntity<>(createdTransportType, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TransportType> updateTransportType(
+    public ResponseEntity<TransportTypeDtoGet> updateTransportType(
             @PathVariable Long id,
             @RequestBody TransportTypeDtoPost transportTypeDtoPost) {
-        TransportType updatedTransportType = transportTypeService.updateTransportType(id, transportTypeDtoPost);
+        TransportTypeDtoGet updatedTransportType = transportTypeService.updateTransportType(id, transportTypeDtoPost);
         return ResponseEntity.ok(updatedTransportType);
     }
 

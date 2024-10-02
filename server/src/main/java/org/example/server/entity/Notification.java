@@ -1,12 +1,15 @@
 package org.example.server.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "notifications")
-
+@Builder
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +27,17 @@ public class Notification {
     @JoinColumn(name = "transport_line_id")
     private TransportLine transportLine;
 
-    // Constructeurs, Getters et Setters
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    private Admin author;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "citizen_notification",
+            joinColumns = @JoinColumn(name = "notification_id",  referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "citizen_id",  referencedColumnName = "id"))
+    private List<Citizen> citizens;
+
+
     public Notification() {
     }
 
@@ -36,7 +49,7 @@ public class Notification {
         this.transportLine = transportLine;
     }
 
-    // Getters et Setters
+
     public Long getId() {
         return id;
     }

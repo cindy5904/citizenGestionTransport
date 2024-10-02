@@ -1,12 +1,12 @@
 package org.example.server.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
-import javax.sound.sampled.Line;
 import java.util.List;
 @Entity
 @Table(name= "transport_lines")
-
+@Builder
 public class TransportLine {
 
     @Id
@@ -35,7 +35,7 @@ public class TransportLine {
     }
 
     // Getters et Setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

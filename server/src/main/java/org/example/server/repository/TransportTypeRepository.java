@@ -14,7 +14,6 @@ public interface TransportTypeRepository extends JpaRepository<TransportType, Lo
     // Rechercher un TransportType par son nom
     Optional<TransportType> findByType(String type);
 
-
     // Rechercher tous les TransportType contenant un mot-clé (case insensitive)
     List<TransportType> findByTypeContainingIgnoreCase(String keyword);
 
