@@ -22,7 +22,7 @@ public class TransportTypeService {
     public Optional<TransportType> getTransportTypeById(Long id) {
         return transportTypeRepository.findById(id);
     }
-
+//
     public TransportType createTransportType(TransportTypeDtoPost transportTypeDtoPost) {
         return transportTypeRepository.save(transportTypeDtoPost);
     }
