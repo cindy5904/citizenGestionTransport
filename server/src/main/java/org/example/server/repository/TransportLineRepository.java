@@ -10,5 +10,8 @@ import java.util.Optional;
 @Repository
 public interface TransportLineRepository extends JpaRepository<TransportLine, Long> {
 
-    List<TransportLine> findByNameContaining(String name);
+    List<TransportLine> findByTransportTypeId(Long transportTypeId);
+
+    List<TransportLine> findByOriginAndDestination(String origin, String destination);
+
 }

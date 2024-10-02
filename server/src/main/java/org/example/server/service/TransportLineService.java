@@ -30,7 +30,7 @@ public class TransportLineService {
         return transportLineRepository.save(transportLine);
     }
 
-     // Méthode pour mettre à jour une ligne de transport existante
+     Méthode pour mettre à jour une ligne de transport existante
     public TransportLine updateTransportLine(Long id, TransportLineDtoPost transportLineDetails) {
         Optional<TransportLine> existingTransportLine = transportLineRepository.findById(id);
 
@@ -54,4 +54,7 @@ public class TransportLineService {
         }
     }
 
+
+    public TransportLineDtoGet createTransportLine(TransportLineDtoPost transportLineDtoPost) {
+    }
 }

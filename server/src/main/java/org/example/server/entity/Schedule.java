@@ -21,6 +21,8 @@ public class Schedule {
     @Enumerated(EnumType.STRING)
     private DaysOfWeeks dayOfWeek;
     private LocalTime time;
+
     @ManyToOne
-    private TransportLine line;
+    @JoinColumn(name = "transport_line_id")
+    private TransportLine transportLine;
 }
