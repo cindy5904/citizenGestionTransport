@@ -1,8 +1,7 @@
 package org.example.server.controller;
 
-import org.example.server.dto.schedule.TransportTypeDtoGet;
-import org.example.server.dto.schedule.TransportTypeDtoPost;
-import org.example.server.entity.TransportType;
+import org.example.server.dto.TransportTypeDtoGet;
+import org.example.server.dto.TransportTypeDtoPost;
 import org.example.server.service.TransportTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,13 +16,20 @@ public class TransportTypeController {
 
     @Autowired
     private TransportTypeService transportTypeService;
-    private TransportTypeDtoPost transportTypeDtoPost;
+
     @GetMapping
-    public List<TransportType> getAllTransportTypes() {
-        return transportTypeService.getAllTransportTypes();
+    public ResponseEntity<List<TransportTypeDtoGet>> getAllTransportTypes() {
+        List<TransportTypeDtoGet> transportTypes = transportTypeService.getAllTransportTypes();
+        return ResponseEntity.ok(transportTypes);
     }
 
     @GetMapping("/{id}")
+    public ResponseEntity<TransportTypeDtoGet> getTransportTypeById(@PathVariable Long id) {
+        TransportTypeDtoGet transportType = transportTypeService.getTransportTypeById(id);
+        return ResponseEntity.ok(transportType);
+    }
+
+    @PostMapping
     public ResponseEntity<TransportTypeDtoGet> createTransportType(@RequestBody TransportTypeDtoPost transportTypeDtoPost) {
         TransportTypeDtoGet createdTransportType = transportTypeService.createTransportType(transportTypeDtoPost);
         return new ResponseEntity<>(createdTransportType, HttpStatus.CREATED);
@@ -40,6 +46,18 @@ public class TransportTypeController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTransportType(@PathVariable Long id) {
         transportTypeService.deleteTransportType(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<TransportTypeDtoGet>> findByTypeContaining(@RequestParam String keyword) {
+        List<TransportTypeDtoGet> transportTypes = transportTypeService.findByTypeContaining(keyword);
+        return ResponseEntity.ok(transportTypes);
+    }
+
+    @DeleteMapping("/type")
+    public ResponseEntity<Void> deleteByType(@RequestParam String type) {
+        transportTypeService.deleteByType(type);
         return ResponseEntity.noContent().build();
     }
 
