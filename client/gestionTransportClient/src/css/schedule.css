@@ -1,0 +1,57 @@
+.schedule-container{
+    text-align: center;
+    background-color: #00A994;
+    margin: 0;
+    height: 50px;
+}
+
+h1 {
+    margin: 0;
+    padding-top: 5px;
+}
+
+.select-transport {
+    width: 600px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #0C71C3;
+}
+
+.icon-link {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+}
+
+img {
+    width: 80px;
+    transition: transform 0.3s ease;
+}
+
+.icon-link:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #00A994;
+}
+
+.icon-link:hover img {
+    transform: scale(1.1);
+}
+
+
+.icon-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color : #00A994
+}    
