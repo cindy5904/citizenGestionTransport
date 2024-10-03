@@ -6,13 +6,16 @@ import Register from './components/register'
 import Login from './components/Login'
 import Home from './views/Home'
 import ResultSearchSchedule from './views/ResultSearchSchedule'
+import { RouterProvider } from 'react-router-dom'
 
 function App() {
   
 
   return (
     <>
-     <ResultSearchSchedule/>
+     <div className="App">
+            <RouterProvider router={router} />
+        </div>
     </>
   )
 }

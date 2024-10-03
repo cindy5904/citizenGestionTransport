@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import "../css/register.css";
 import anthony from "../assets/anthony.jpg"
 import logo from "../assets/logo.png";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -11,6 +13,8 @@ const Register = () => {
       password: '',
       confirmPassword: '',
     });
+
+    const navigate = useNavigate();
   
     const handleChange = (e) => {
       setFormData({
@@ -19,13 +23,27 @@ const Register = () => {
       });
     };
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
       console.log('Form Data:', formData);
-  
       
-    };
-  
+      try {
+          const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+              title: `${formData.prenom} ${formData.nom}`,
+              email: formData.email,
+              password: formData.password,
+              confirmPassword: formData.confirmPassword,
+          });
+
+          console.log('Response:', response.data);
+          alert('Compte créé avec succès !');
+          navigate('/login');
+      } catch (error) {
+          console.error('Erreur lors de la création du compte:', error);
+          alert('Une erreur est survenue lors de la création du compte.');
+      }
+  };
+
     return (
     <div className="register-page">
       <div className="register-form-container">

@@ -1,6 +1,7 @@
 package org.example.server.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "notifications")
-
+@Builder
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +37,7 @@ public class Notification {
             inverseJoinColumns = @JoinColumn(name = "citizen_id",  referencedColumnName = "id"))
     private List<Citizen> citizens;
 
-    // Constructeurs, Getters et Setters
+
     public Notification() {
     }
 
@@ -48,7 +49,7 @@ public class Notification {
         this.transportLine = transportLine;
     }
 
-    // Getters et Setters
+
     public Long getId() {
         return id;
     }
@@ -97,9 +98,7 @@ public class Notification {
     public void setTransportLine(TransportLine transportLine) {
         this.transportLine = transportLine;
     }
-
-
-
+    
     public boolean isIsActive() {
         return isActive;
     }

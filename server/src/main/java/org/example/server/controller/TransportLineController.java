@@ -1,8 +1,9 @@
 package org.example.server.controller;
 
 
-import org.example.server.dto.schedule.TransportLineDtoGet;
-import org.example.server.dto.schedule.TransportLineDtoPost;
+import jakarta.persistence.EntityNotFoundException;
+import org.example.server.dto.TransportLineDtoGet;
+import org.example.server.dto.TransportLineDtoPost;
 import org.example.server.entity.TransportLine;
 import org.example.server.service.TransportLineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +48,13 @@ public class TransportLineController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTransportLine(@PathVariable Long id) {
-        transportLineService.deleteTransportLineById(id);
-        return ResponseEntity.noContent().build();
+        try {
+            transportLineService.deleteTransportLineById(id);
+            return ResponseEntity.noContent().build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
-
 }
+
+
