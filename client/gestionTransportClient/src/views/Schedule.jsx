@@ -33,6 +33,17 @@ const Schedule = () => {
                 <a href="" className="icon-link"><img src={metro} alt="Icône métro" /></a>
             </div>
         </div>
+        <div className="select-station">
+            <h3>Selectionner une ligne</h3>
+            <div className="number-line">
+                <div className="one-line">
+                    <p className="text-number">1</p>
+                </div>
+                <div className="second-line">
+                    <p className="text-number">2</p>
+                </div>
+            </div>
+        </div>
         </>
     )
 }

@@ -98,9 +98,7 @@ public class Notification {
     public void setTransportLine(TransportLine transportLine) {
         this.transportLine = transportLine;
     }
-
-
-
+    
     public boolean isIsActive() {
         return isActive;
     }

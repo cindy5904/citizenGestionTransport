@@ -14,7 +14,7 @@
     background-color: #79bfd4;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    height: 450px;
+    height: 550px;
   }
   
   .login-form-content {
@@ -39,7 +39,7 @@
   }
   
   input {
-    width: 80%;
+    width: 60%;
     padding: 10px;
     border-radius: 5px;
     border: lightgray;
